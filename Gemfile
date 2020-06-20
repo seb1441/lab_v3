@@ -56,3 +56,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "stimulus_reflex", "~> 3.2"
 
 gem "devise", "~> 4.7"
+
+gem 'redis', '~> 4.1', '>= 4.1.4'
+gem 'hiredis', '~> 0.6.3'

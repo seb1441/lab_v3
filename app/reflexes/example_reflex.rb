@@ -21,4 +21,7 @@ class ExampleReflex < ApplicationReflex
   #   end
   #
   # Learn more at: https://docs.stimulusreflex.com
+  def toggle_menu
+    @showmenu = element.dataset[:showmenu] == 'true' ? false : true
+  end
 end
