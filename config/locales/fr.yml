@@ -29,15 +29,18 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
+# translation missing: fr.devise.sessions.user.signed_out
+fr:
   time:
     formats:
-      default: "%A, %B %d, %Y at %H:%M"
+      default: "%A le %d %B %Y à %H:%S"
   date:
     formats:
-      default: "%A, %B %d, %Y"
+      default: "%A le %d %B %Y"
+    day_names: [Dimanche, Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi]
+    month_names: [Janvier, Février, Mars, Avril, Mai, Juin, Juillet, Août, Septembre, Octobre, Novembre, Décembre]
   pages:
     home:
-      header1: LAB, the tool for all your
-      header2: daily needs!
-      headerbody: Tired of using all sorts of different apps for you daily needs? Wouldn't that be nice if all was centralized in a single application? If so, then LAB is for you!
+      header1: LAB, l'outil pour tous vos
+      header2: besoins quotidiens!
+      headerbody: Fatigué d'utiliser toutes sortes d'applications différentes pour vos besoins quotidiens? Ce ne serait pas bien si tout était centralisé dans une seule application? Si oui, alors LAB est pour vous!
