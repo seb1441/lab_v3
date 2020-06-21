@@ -20,7 +20,14 @@ class NavbarReflex < ApplicationReflex
   #   end
   #
   # Learn more at: https://docs.stimulusreflex.com
-  def open_menu
-    @menuopen = element.dataset[:menuopen] == "true" ? "false" : "true"
+  def toggle_user_menu
+    # @showusermenu = element.dataset[:showusermenu] == "true" ? "false" : "true"
+    @showusermenu = session[:showusermenu] = session[:showusermenu] == true ? false : true
+    @shownavbarmenu = session[:shownavbarmenu]
+  end
+
+  def toggle_navbar_menu
+    # @shownavbarmenu = element.dataset[:shownavbarmenu] == 'true' ? false : true
+    @shownavbarmenu = session[:shownavbarmenu] = session[:shownavbarmenu] == true ? false : true
   end
 end
