@@ -2,19 +2,20 @@
   <div class="flex items-center justify-between px-4 py-3 sm:p-0">
     <%# <div class="text-6xl mr-4 border-solid border h-19"><h1 class="-mt-4 -mb-2 text-white">主</h1></div> %>
     <%= link_to "LAB", root_path, class: "font-semibold text-xl tracking-tight got-font tracking-wide text-white select-none" %>
-    <div class="block lg:hidden">
+    <div class="block lg:hidden flex justify-end">
+      <%= link_to I18n.locale == :en ? "FR" : "EN", url_for(locale: I18n.locale == :en ? :fr : :en), class: "block px-2 py-1 text-gray-600 font-semibold rounded hover:bg-gray-200 mr-1" %>
       <button data-reflex="click->NavbarReflex#toggle_navbar_menu" class="flex items-center px-3 py-2 border rounded text-teal-200 border-white hover:text-white hover:border-white">
         <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
       </button>
     </div>
   </div>
-  <nav class="block px-2 pt-2 pb-4 sm:flex sm:p-0 <%= @shownavbarmenu ? 'block' : 'hidden' %>">
+  <nav class="px-2 pt-2 pb-4 sm:flex sm:p-0 <%= @shownavbarmenu ? 'block' : 'hidden' %>">
     <% if @admin_area %>
       <a href="#" class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Lessons</a>
       <%#= link_to 'Students Side', pages_home_path, class: "block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 #{'bg-gray-800' if request.path == pages_home_path}" %>
     <% else %>
       <%= link_to "Reminders", pages_reminders_path, class: "block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 #{'bg-gray-800' if pages_reminders_path.split("?")[0] == request.path}" %>
-      <%= link_to I18n.locale == :en ? "French" : "English", url_for(locale: I18n.locale == :en ? :fr : :en), class: "mt-1 block px-2 py-1 text-gray-600 font-semibold rounded hover:bg-gray-200 sm:mt-0 sm:ml-2" %>
+      <%= link_to I18n.locale == :en ? "FR" : "EN", url_for(locale: I18n.locale == :en ? :fr : :en), class: "mt-1 hidden lg:block px-2 py-1 text-gray-600 font-semibold rounded hover:bg-gray-200 sm:mt-0 sm:ml-2" %>
       <%#= link_to 'H', "#", class: "mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2 #{'bg-gray-800' if request.path == "/"}" %>
       <%= link_to 'Sign in', new_user_session_path, class: "mt-1 block px-2 py-1 text-gray-800 font-semibold rounded hover:bg-gray-100 sm:mt-0 sm:ml-2" unless current_user %>
     <% end %>
