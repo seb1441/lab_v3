@@ -9,11 +9,11 @@
       <a href="#" class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Lessons</a>
       <%#= link_to 'Students Side', pages_home_path, class: "block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 #{'bg-gray-800' if request.path == pages_home_path}" %>
     <% else %>
-      <%= link_to 'To-dos', "#", class: "block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 #{'bg-gray-800' if request.path == "/"}" %>
+      <%= link_to "Reminders", pages_reminders_path, class: "block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 #{'bg-gray-800' if pages_reminders_path.split("?")[0] == request.path}" %>
+      <%= link_to I18n.locale == :en ? "French" : "English", root_path(locale: I18n.locale == :en ? :fr : :en), class: "mt-1 block px-2 py-1 text-gray-800 font-semibold rounded hover:bg-gray-200 sm:mt-0 sm:ml-2" %>
       <%#= link_to 'H', "#", class: "mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2 #{'bg-gray-800' if request.path == "/"}" %>
       <%= link_to 'Sign in', new_user_session_path, class: "mt-1 block px-2 py-1 text-gray-800 font-semibold rounded hover:bg-gray-200 sm:mt-0 sm:ml-2" unless current_user %>
     <% end %>
-    <%= link_to I18n.locale == :en ? "French" : "English", root_path(locale: I18n.locale == :en ? :fr : :en), class: "mt-1 block px-2 py-1 text-gray-800 font-semibold rounded hover:bg-gray-200 sm:mt-0 sm:ml-2" %>
     <% if current_user %>
       <div class="relative ml-6">
         <button data-reflex="click->NavbarReflex#open_menu" data-menuopen="<%= @menuopen %>" class="relative z-10 block h-8 w-8 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-white">
