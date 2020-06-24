@@ -3,11 +3,13 @@ class BoxesReflex < ApplicationReflex
     box = Box.find(id)
     box.update(name: name)
 
-    # if box == Box.last
-    #   create_box
-    # else
-      @halted = true
-    # end
+    @halted = true
+  end
+
+  def update_box_color(id, color)
+    Box.find(id).update(color: color)
+
+    # @halted = true
   end
 
   def delete_box
@@ -18,20 +20,15 @@ class BoxesReflex < ApplicationReflex
     note = Note.find(id)
     note.update(content: content)
 
-    # if note == Note.last
-    #   create_box
-    # else
-      @halted = true
-    # end
+    @halted = true
   end
 
-  def create_box(name, content)
-    if name.present?
-      Box.create(
-        name: name,
-        user: current_user,
-        boxable: Note.create(content: content)
-      )
-    end
+  def create_box(name, content, color)
+    Box.create(
+      name: name,
+      user: current_user,
+      color: color,
+      boxable: Note.create(content: content)
+    )
   end
 end

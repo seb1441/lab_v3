@@ -1,8 +1,9 @@
 class BoxesController < ApplicationController
   before_action :set_box, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
-    @boxes = Box.all.order(created_at: :desc)
+    @boxes = Box.where(user: current_user).order(created_at: :desc)
   end
 
   def show
