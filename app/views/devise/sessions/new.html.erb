@@ -10,7 +10,7 @@
         <%= f.password_field :password, autocomplete: "current-password", class: "shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" %>
       </div>
       <div class="flex items-center justify-between">
-        <%= f.submit "Sign In", class: "bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+        <%= f.submit t("sign_in"), class: "bg-indigo-400 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
         <% if devise_mapping.rememberable? %>
           <div class="inline-block align-baseline font-bold text-sm text-indigo-400 hover:text-indigo-600" href="#">
             <%= f.check_box :remember_me %>

@@ -5,3 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+user = User.create(email: "test@test.com", username: "Seb", password: "test123")
+
+2.times do
+  Box.create(
+    user: user,
+    name: Faker::FunnyName.name,
+    boxable: Note.create(content: Faker::Quote.matz)
+  )
+
+  Box.create(
+    user: user,
+    name: Faker::FunnyName.name,
+    boxable: Note.create(content: Faker::Quote.famous_last_words)
+  )
+end
+
+Box.create(
+  user: user,
+  name: "",
+  boxable: Note.create(content: "")
+)

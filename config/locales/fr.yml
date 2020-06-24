@@ -44,3 +44,14 @@ fr:
       header1: LAB, l'outil pour tous vos
       header2: besoins quotidiens!
       headerbody: Fatigué d'utiliser toutes sortes d'applications différentes pour vos besoins quotidiens? Ce ne serait pas bien si tout était centralisé dans une seule application? Si oui, alors LAB est pour vous!
+  navbar:
+    user_settings: Paramètres d'utilisateur
+    sign_out: Se déconnecter
+  sign_in: Se connecter
+  sign_up: S'enregistrer
+  # fr:
+  #   devise:
+  #     sessions: 
+  #       user:
+  #         signed_out: Déconnexion réussie.
+  #         signed_in: Connexion réussie.

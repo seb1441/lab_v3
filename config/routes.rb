@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :boxes
+  resources :notes
   devise_for :users
   root 'pages#home'
   get "/reminders" => "pages#reminders", as: "pages_reminders"

@@ -59,3 +59,4 @@ gem "devise", "~> 4.7"
 
 gem 'redis', '~> 4.1', '>= 4.1.4'
 gem 'hiredis', '~> 0.6.3'
+gem "faker", "~> 2.12"

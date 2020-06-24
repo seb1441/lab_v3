@@ -40,4 +40,9 @@ en:
     home:
       header1: LAB, the tool for all your
       header2: daily needs!
-      headerbody: Tired of using all sorts of different apps for you daily needs? Wouldn't that be nice if all was centralized in a single application? If so, then LAB is for you!
+      headerbody: Tired of using all sorts of different apps for your daily needs? Wouldn't that be nice if all was centralized in a single application? If so, then LAB is for you!
+  navbar:
+    user_settings: User Settings
+    sign_out: Sign Out
+  sign_in: Sign In
+  sign_up: Sign Up
