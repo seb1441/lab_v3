@@ -13,13 +13,14 @@ export default class extends Controller {
   }
 
   updateBoxName() {
-    // UPDATE THE INDEX HTML TO TARGET NOTE NAME 
-    console.log('GG')
     this.stimulate('BoxesReflex#update_box_name', this.boxNameTarget.getAttribute("data-id"), this.boxNameTarget.textContent)
   }
 
   updateNoteContent() {
-    console.log('GG')
     this.stimulate('BoxesReflex#update_note_content', this.noteContentTarget.getAttribute("data-id"), this.noteContentTarget.textContent)
+  }
+
+  createBox() {
+    this.stimulate('BoxesReflex#create_box', this.boxNameTarget.textContent, this.noteContentTarget.textContent)
   }
 }
