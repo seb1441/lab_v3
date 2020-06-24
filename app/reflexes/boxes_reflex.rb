@@ -26,10 +26,12 @@ class BoxesReflex < ApplicationReflex
   end
 
   def create_box(name, content)
-    Box.create(
-      name: name,
-      user: current_user,
-      boxable: Note.create(content: content)
-    )
+    if name.present?
+      Box.create(
+        name: name,
+        user: current_user,
+        boxable: Note.create(content: content)
+      )
+    end
   end
 end

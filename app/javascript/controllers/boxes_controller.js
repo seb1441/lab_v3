@@ -1,15 +1,15 @@
 import { Controller } from "stimulus"
 import StimulusReflex from 'stimulus_reflex';
-
-let throttle = require('lodash/throttle');
+import { debounce } from 'lodash-es'
 
 export default class extends Controller {
   static targets = [ "boxName", "noteContent" ]
 
   connect() {
     StimulusReflex.register(this)
-    this.updateBoxName = throttle(this.updateBoxName, 500)
-    this.updateNoteContent = throttle(this.updateNoteContent, 500)
+    this.updateBoxName = debounce(this.updateBoxName, 500)
+    this.updateNoteContent = debounce(this.updateNoteContent, 500)
+    this.createBox = debounce(this.createBox, 500)
   }
 
   updateBoxName() {
@@ -17,6 +17,7 @@ export default class extends Controller {
   }
 
   updateNoteContent() {
+    console.log('GG')
     this.stimulate('BoxesReflex#update_note_content', this.noteContentTarget.getAttribute("data-id"), this.noteContentTarget.textContent)
   }
 
