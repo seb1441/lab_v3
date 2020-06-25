@@ -12,9 +12,9 @@
 </head>
 
   <body class="bg-gray-100">
-    <%= render "layouts/navbar" %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= render partial: "layouts/navbar" %>
+    <%= render partial: "layouts/notif", locals: { color: "teal", message: notice } if notice %>
+    <%= render partial: "layouts/notif", locals: { color: "red", message: alert } if alert %>
     <%= yield %>
     <footer class="fixed left-0 bottom-0 text-center w-full border-t-2 border-gray-400 round">© 2020 LAB, Inc.</footer>
   </body>

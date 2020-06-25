@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_21_205953) do
+ActiveRecord::Schema.define(version: 2020_06_25_010823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "box_categories", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_box_categories_on_user_id"
+  end
 
   create_table "boxes", force: :cascade do |t|
     t.string "name"
@@ -22,6 +30,9 @@ ActiveRecord::Schema.define(version: 2020_06_21_205953) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "color", default: "#f05252", null: false
+    t.bigint "box_category_id"
+    t.index ["box_category_id"], name: "index_boxes_on_box_category_id"
     t.index ["boxable_type", "boxable_id"], name: "index_boxes_on_boxable_type_and_boxable_id"
     t.index ["user_id"], name: "index_boxes_on_user_id"
   end
@@ -45,5 +56,7 @@ ActiveRecord::Schema.define(version: 2020_06_21_205953) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "box_categories", "users"
+  add_foreign_key "boxes", "box_categories"
   add_foreign_key "boxes", "users"
 end

@@ -31,4 +31,6 @@ export default class extends Controller {
   updateBoxColor() {
     this.stimulate('BoxesReflex#update_box_color', this.boxNameTarget.getAttribute("data-id"), this.boxColorTarget.value)
   }
+
+  // this.notifTarget.classList.add("hidden")
 }

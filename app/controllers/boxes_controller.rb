@@ -3,7 +3,15 @@ class BoxesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @boxes = Box.where(user: current_user).order(created_at: :desc)
+    @boxes = Box.includes(:box_category).where(user: current_user)
+
+    @boxes = @boxes.where(box_categories: { name: params[:box_category] }) if params[:box_category]
+
+    # @box_category_names = Category.wh
+    @box_category_names = BoxCategory.where(user: current_user).pluck(:name)
+
+    
+    @boxes = @boxes.order(created_at: :desc)
   end
 
   def show

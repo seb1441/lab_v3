@@ -24,7 +24,7 @@ class BoxesReflex < ApplicationReflex
   end
 
   def create_box(name, content, color)
-    Box.create(
+    box = Box.create(
       name: name,
       user: current_user,
       color: color,

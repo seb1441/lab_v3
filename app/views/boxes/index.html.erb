@@ -1,16 +1,27 @@
-<p id="notice"><%= notice %></p>
-
+<ul class="flex border-b mt-2 ml-2 flex-wrap">
+  <li class="-mb-px mr-1">
+    <%= link_to "All", url_for, class: params[:box_category].blank? ? selected_tab_class : tab_class %>
+  </li>
+  <% @box_category_names.each do |box_category_name| %>
+    <li class="mr-1">
+      <%= link_to box_category_name.humanize, url_for(box_category: box_category_name), class: params[:box_category] == box_category_name ? selected_tab_class : tab_class %>
+    </li>
+  <% end %>
+  <li class="mr-1 flex flex-col justify-center">
+    <a href="#"><i class="fas fa-plus text-1xl"></i></a>
+  </li>
+</ul>
 <section class="flex justify-center align-middle flex-wrap">
-  <div class="pb-5 pt-1 text-white m-2 w-96 flex flex-col justify-between" data-controller="boxes" style="background-color: #f05252">
+  <div class="pb-5 pt-1 text-white m-2 w-96 flex flex-col justify-between rounded-lg" data-controller="boxes" style="background-color: #f05252">
     <div class="flex align-bottom flex-wrap justify-between mr-2 ml-2">
       <input type="color" value="#f05252" class="w-5 bg-red-500 mr-2" data-target="boxes.boxColor">
       <a href="#" data-action="click->boxes#createBox" ><i class="fas fa-save"></i></a>
     </div>
-    <div contenteditable data-target="boxes.boxName" class="ml-5 mt-1 mr-5 mb-1 font-bold border-red-400 border-2" style="border-color: <%= border_color_transformed("#f98080") %>"></div>
-    <div contenteditable data-target="boxes.noteContent" class="ml-5 mr-5 h-full border-red-400 border-2"></div>
+    <div contenteditable data-target="boxes.boxName" class="ml-5 mt-1 mr-5 mb-1 font-bold border-2" style="border-color: <%= border_color_transformed("#f05252") %>"></div>
+    <div contenteditable data-target="boxes.noteContent" class="ml-5 mr-5 h-full border-2" style="border-color: <%= border_color_transformed("#f05252") %>"></div>
   </div>
   <% @boxes.each do |box| %>
-    <div class="pb-5 pt-1 m-2 w-96 flex flex-col justify-between" data-controller="boxes" style="<%= "background-color: #{box.color}; color: #{text_color_transformed(box.color)}" %>">
+    <div class="pb-5 pt-1 m-2 w-96 flex flex-col justify-between rounded-lg" data-controller="boxes" style="<%= "background-color: #{box.color}; color: #{text_color_transformed(box.color)}" %>">
       <div class="flex align-bottom flex-wrap justify-between mr-2 ml-2">
         <input type="color" data-id="<%= box.id %>" value="<%= box.color %>" class="w-5 mr-2" data-action="input->boxes#updateBoxColor" data-target="boxes.boxColor" style="<%= "background-color: #{box.color}" %>">
         <div>
