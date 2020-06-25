@@ -51,7 +51,7 @@ module BoxesHelper
     sliced_hex_color = hex_color[1..-1]
     
     new_hex_color = ""
-    if text_color_transformed(hex_color) == "white"
+    if text_color_transformed(hex_color) == "black"
       sliced_hex_color.chars.each_slice(2) do |slice|
         num = slice.join.to_i(16)
         num *= 0.75
