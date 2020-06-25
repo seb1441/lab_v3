@@ -21,9 +21,3 @@ user = User.create(email: "test@test.com", username: "Seb", password: "test123")
     boxable: Note.create(content: Faker::Quote.famous_last_words)
   )
 end
-
-Box.create(
-  user: user,
-  name: "",
-  boxable: Note.create(content: "")
-)
