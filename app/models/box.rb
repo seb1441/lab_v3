@@ -3,6 +3,8 @@ class Box < ApplicationRecord
   belongs_to :boxable, polymorphic: true, dependent: :destroy
   belongs_to :box_category, required: false
 
+  validates :name, presence: true
+
   accepts_nested_attributes_for :boxable
   
   def build_boxable(params)
