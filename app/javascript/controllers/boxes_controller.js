@@ -11,6 +11,16 @@ export default class extends Controller {
     this.updateNoteContent = debounce(this.updateNoteContent, 500)
     this.createBox = throttle(this.createBox, 500)
     this.updateBoxColor = debounce(this.updateBoxColor, 500)
+
+    // document.getElementsByClassName('trix-button--icon-strike')[0].classList.add('hidden')
+    // document.getElementsByClassName('trix-button--icon-heading-1')[0].classList.add('hidden')
+    // document.getElementsByClassName('trix-button--icon-quote')[0].classList.add('hidden')
+    // document.getElementsByClassName('trix-button--icon-code')[0].classList.add('hidden')
+    // document.getElementsByClassName('trix-button--icon-bullet-list')[0].classList.add('hidden')
+    // document.getElementsByClassName('trix-button--icon-number-list')[0].classList.add('hidden')
+    // document.getElementsByClassName('trix-button--icon-decrease-nesting-level')[0].classList.add('hidden')
+    // document.getElementsByClassName('trix-button--icon-increase-nesting-level')[0].classList.add('hidden')
+    // document.getElementsByClassName('trix-button-group--block-tools')[0].classList.add('hidden')
   }
 
   updateBoxName() {

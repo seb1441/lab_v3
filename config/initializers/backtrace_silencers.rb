@@ -5,3 +5,8 @@
 
 # You can also remove all the silencers if you're trying to debug a problem that might stem from framework code.
 # Rails.backtrace_cleaner.remove_silencers!
+
+# ActiveSupport.on_load(:action_view) do
+#   include ActionText::ContentHelper
+#   include ActionText::TagHelper
+# end

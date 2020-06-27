@@ -31,4 +31,20 @@ class BoxesReflex < ApplicationReflex
       boxable: Note.create(content: content)
     )
   end
+
+  def submit
+    if box = GlobalID::Locator.locate_signed(element.dataset.dig("signed-id"))
+      box.assign_attributes(box_params)
+      box.save
+      @halted = true
+    else
+      Box.create(box_params)
+    end
+  end
+
+  private
+
+  def box_params
+    params.require(:box).permit(:name, boxable_attributes: [:id, :rich_text])
+  end
 end
