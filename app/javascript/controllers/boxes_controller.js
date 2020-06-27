@@ -3,7 +3,7 @@ import StimulusReflex from 'stimulus_reflex';
 import { debounce, throttle } from 'lodash-es'
 
 export default class extends Controller {
-  static targets = [ "boxName", "noteContent", "boxColor" ]
+  static targets = [ "noteContent", "boxColor" ]
 
   connect() {
     StimulusReflex.register(this)
@@ -39,7 +39,7 @@ export default class extends Controller {
   }
 
   updateBoxColor() {
-    this.stimulate('BoxesReflex#update_box_color', this.boxNameTarget.getAttribute("data-id"), this.boxColorTarget.value)
+    this.stimulate('BoxesReflex#update_box_color', this.boxColorTarget.getAttribute("data-id"), this.boxColorTarget.value)
   }
 
   // this.notifTarget.classList.add("hidden")

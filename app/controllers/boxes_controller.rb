@@ -31,11 +31,9 @@ class BoxesController < ApplicationController
 
     respond_to do |format|
       if @box.save
-        format.html { redirect_to boxes_path, notice: 'Box was successfully created.' }
-        format.json { render :show, status: :created, location: @box }
+        format.html { redirect_to boxes_path }
       else
         format.html { render :new }
-        format.json { render json: @box.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,7 +41,7 @@ class BoxesController < ApplicationController
   def update
     respond_to do |format|
       if @box.update(box_params)
-        format.html { redirect_to @box, notice: 'Box was successfully updated.' }
+        format.html { redirect_to boxes_path }
         format.json { render :show, status: :ok, location: @box }
       else
         format.html { render :edit }
@@ -55,8 +53,7 @@ class BoxesController < ApplicationController
   def destroy
     @box.destroy
     respond_to do |format|
-      format.html { redirect_to boxes_url, notice: 'Box was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to boxes_url }
     end
   end
 
@@ -68,6 +65,6 @@ class BoxesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def box_params
-      params.require(:box).permit(:name, boxable_attributes: [:id, :rich_text])
+      params.require(:box).permit(:name, :color, boxable_attributes: [:id, :rich_text])
     end
 end
