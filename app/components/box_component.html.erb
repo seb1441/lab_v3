@@ -1,9 +1,9 @@
-<%# overflow-hidden flex-col %>
-<div class="pt-1 m-2 w-96 rounded-lg" data-controller="boxes" style="<%= "background-color: #{@box.color}; color: #{text_color_transformed(@box.color)}" %>">
-  <%= form_with model: @box, class: "" do |f| %>
+<div class="pt-1 m-2 w-96 rounded-lg" data-controller="boxes" style="<%= "background-color: #{@box.color}; color: #{text_color_transformed(@box.color)}" %>" data-signed-id="<%= @signed_id %>" data-target="boxes.boxDiv">
+  <%= form_with model: @box, data: { target: "boxes.form" } do |f| %>
+    <% submit_action = "change->boxes#submit" if @box.persisted?%>
     <div class="flex align-bottom flex-wrap justify-between mr-2 ml-2">
+      <%= f.color_field :color, class: "w-5 mr-2", style: "background-color: #{@box.color}", data: { action: "#{submit_action} change->boxes#updateColor", target: "boxes.colorPicker" } %>
       <% if @box.persisted? %>
-        <input type="color" data-id="<%= @box.id %>" value="<%= @box.color %>" class="w-5 mr-2" data-action="input->boxes#updateBoxColor" data-target="boxes.boxColor" style="<%= "background-color: #{@box.color}" %>">
         <div>
           <a href="#" data-id="<%= @box.id %>%" ><i class="fas fa-angle-up"></i></a>
           <a href="#" data-id="<%= @box.id %>%" ><i class="fas fa-angle-double-up"></i></a>
@@ -14,24 +14,15 @@
           <i class="fas fa-times"></i>
         <% end %>
       <% else %>
-        <%= f.color_field :color, class: "w-5 mr-2", style: "background-color: #{@box.color}" %>
         <%= f.button :submit, data: { disable_with: "<i class='fas fa-spinner'></i>" } do %>
           <i class="fas fa-save"></i>
         <% end %>
       <% end %>
     </div>
     <div class="mx-5">
-      <% if @box.persisted? %>
-        <%= f.text_field :name, class: "w-full my-1 bg-transparent outline-none border", style: "border-color: #{@box.color}", data: { reflex: "change->BoxesReflex#submit", signed_id: @signed_id }, required: true %>
-      <% else %>
-        <%= f.text_field :name, class: "w-full my-1 bg-transparent outline-none border", style: "border-color: #{border_color_transformed(@box.color)}", required: true %>
-      <% end %>
+      <%= f.text_field :name, class: "w-full my-1 bg-transparent outline-none border", style: "border-color: #{ @box.name.present? ? @box.color : border_color_transformed(@box.color)}", data: { action: @box.persisted? ? "input->boxes#submit" : nil }, required: true %>
       <%= f.fields_for :boxable, @box.boxable do |boxable_form| %>
-        <% if @box.persisted?%>
-          <%= boxable_form.rich_text_area :rich_text, class: "mb-4 bg-transparent w-full h-full", style: "border-color: #{@box.boxable.rich_text.body&.to_plain_text.present? ? @box.color : border_color_transformed(@box.color)}", data: { reflex: "input->BoxesReflex#submit", signed_id: @signed_id } %>
-        <% else %>
-        <%= boxable_form.rich_text_area :rich_text, class: "mb-4 bg-transparent w-full h-full", style: "border-color: #{border_color_transformed(@box.color)}" %>
-        <% end %>
+        <%= boxable_form.rich_text_area :rich_text, class: "mb-4 bg-transparent w-full h-full", style: "border-color: #{@box.boxable.rich_text.body&.to_plain_text.present? ? @box.color : border_color_transformed(@box.color)}", data: { action: @box.persisted? ? "input->boxes#submit" : nil, signed_id: @signed_id } %>
       <% end %>
     </div>
   <% end %>
