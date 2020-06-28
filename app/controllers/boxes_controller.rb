@@ -2,6 +2,8 @@ class BoxesController < ApplicationController
   before_action :set_box, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
+  include CableReady::Broadcaster
+
   def index
     @boxes = Box.includes(:box_category).where(user: current_user)
 
@@ -32,9 +34,25 @@ class BoxesController < ApplicationController
 
     respond_to do |format|
       if @box.save
-        format.html { redirect_to boxes_path }
+        channel = "boxes-channel:#{current_user.id}"
+        cable_ready[channel].insert_adjacent_html(
+          selector: "#newBox",
+          position: "afterend",
+          html: ApplicationController.render(BoxComponent.new(box: @box))
+        )
+        cable_ready[channel].set_value(
+          selector: "#newBoxName",
+          value: ""
+        )
+        cable_ready[channel].set_value(
+          selector: "#newBoxRichText",
+          value: ""
+        )
+        cable_ready.broadcast
+
+        format.json { render json: {}, status: :ok }
       else
-        format.html { render :new }
+        # format.html { render :new }
       end
     end
   end
@@ -42,10 +60,8 @@ class BoxesController < ApplicationController
   def update
     respond_to do |format|
       if @box.update(box_params)
-        format.html { redirect_to boxes_path }
-        format.json { render :show, status: :ok, location: @box }
+        format.json { render json: {}, status: :ok }
       else
-        format.html { render :edit }
         format.json { render json: @box.errors, status: :unprocessable_entity }
       end
     end
@@ -53,9 +69,9 @@ class BoxesController < ApplicationController
 
   def destroy
     @box.destroy
-    respond_to do |format|
-      format.html { redirect_to boxes_url }
-    end
+
+    cable_ready["boxes-channel:#{current_user.id}"].remove(selector: "#box-#{@box.id}")
+    cable_ready.broadcast
   end
 
   private
