@@ -5,6 +5,8 @@ class Box < ApplicationRecord
 
   validates :name, presence: true
 
+  acts_as_list
+
   accepts_nested_attributes_for :boxable
   
   def build_boxable(params)

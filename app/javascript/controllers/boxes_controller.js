@@ -24,9 +24,6 @@ export default class extends Controller {
   }
 
   submit(event) {
-    // this.stimulate('BoxesReflex#submit', this.formData())
-    // this.nameTarget.value = ''
-    // this.richTextTarget.value = ''
     event.preventDefault()
     Rails.fire(this.formTarget, "submit")
   }

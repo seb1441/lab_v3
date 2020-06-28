@@ -11,7 +11,7 @@
     <a href="#"><i class="fas fa-plus text-1xl"></i></a>
   </li>
 </ul>
-<section class="flex justify-center align-middle flex-wrap">
+<section data-controller="drag" class="flex justify-center align-middle flex-wrap" data-drag-url="/boxes/:id">
   <%= render BoxComponent.new(box: @new_box) %>
   <% @boxes.each do |box| %>
     <%= render BoxComponent.new(box: box) %>

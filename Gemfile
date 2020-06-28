@@ -62,3 +62,5 @@ gem 'hiredis', '~> 0.6.3'
 gem "faker", "~> 2.12"
 
 gem "view_component", "~> 2.11"
+
+gem "acts_as_list", "~> 1.0"

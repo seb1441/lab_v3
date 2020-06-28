@@ -14,7 +14,7 @@ class BoxesController < ApplicationController
     @new_box = Box.new(boxable: Note.new)
     @new_box.color = current_user.last_used_box_color if current_user.last_used_box_color
     
-    @boxes = @boxes.order(created_at: :desc)
+    @boxes = @boxes.order(position: :asc)
   end
 
   def show
@@ -58,6 +58,11 @@ class BoxesController < ApplicationController
   end
 
   def update
+    if params[:position]
+      @box.insert_at(params[:position].to_i)
+      return head :ok
+    end
+
     respond_to do |format|
       if @box.update(box_params)
         format.json { render json: {}, status: :ok }
