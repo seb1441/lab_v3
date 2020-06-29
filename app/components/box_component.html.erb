@@ -1,4 +1,4 @@
-<div id="<%= @box.persisted? ? "box-#{@box.id}" : "newBox" %>" class="<%= "sort-disabled" unless @box.persisted? %> pt-1 m-2 w-96 rounded-lg shadow-md" data-controller="boxes" style="<%= "background-color: #{@box.color}; color: #{text_color_transformed(@box.color)}" %>" data-target="boxes.boxDiv" data-id="<%= @box.id %>">
+<div id="<%= @box.persisted? ? "box-#{@box.id}" : "newBox" %>" class="pt-1 m-2 w-96 rounded-lg shadow-md" data-controller="boxes" style="<%= "background-color: #{@box.color}; color: #{text_color_transformed(@box.color)}" %>" data-target="boxes.boxDiv" data-id="<%= @box.id %>">
   <%= form_with model: @box, data: { target: "boxes.form" }, remote: true do |f| %>
     <div class="flex align-bottom flex-wrap justify-between mr-2 ml-2">
       <%= f.color_field :color, class: "w-5 mr-2", style: "background-color: #{@box.color}", data: { action: "#{submit_action} change->boxes#updateColor", target: "boxes.colorPicker" } %>

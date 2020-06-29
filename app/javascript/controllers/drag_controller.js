@@ -7,8 +7,14 @@ export default class extends ApplicationController {
     this.sortable = Sortable.create(this.element, {
       onEnd: this.end.bind(this),
       animation: 150,
-      filter: '.sort-disabled',
+      // filter: '.sort-disabled',
+      // draggable: '.sort-enabled',
+      delay: 150,
+      delayOnTouchOnly: true,
       preventOnFilter: false,
+      ghostClass: "dragged-item",  // Class name for the drop placeholder
+      // chosenClass: "dragged-item",  // Class name for the chosen item
+      // dragClass: "dragged-item",  // Class name for the dragging item
     })
   }
 
