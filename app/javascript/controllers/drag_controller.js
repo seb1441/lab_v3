@@ -11,7 +11,7 @@ export default class extends ApplicationController {
       // draggable: '.sort-enabled',
       delay: 150,
       delayOnTouchOnly: true,
-      preventOnFilter: false,
+      // preventOnFilter: false,
       ghostClass: "dragged-item",  // Class name for the drop placeholder
       // chosenClass: "dragged-item",  // Class name for the chosen item
       // dragClass: "dragged-item",  // Class name for the dragging item

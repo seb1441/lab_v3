@@ -2,13 +2,22 @@
   <li class="-mb-px mr-1">
     <%= link_to "All", url_for, class: params[:box_category].blank? ? selected_tab_class : tab_class %>
   </li>
-  <% @box_category_names.each do |box_category_name| %>
-    <li class="mr-1">
-      <%= link_to box_category_name.humanize, url_for(box_category: box_category_name), class: params[:box_category] == box_category_name ? selected_tab_class : tab_class %>
+  <% @box_categories.each do |box_category| %>
+    <li class="mr-1 flex" data-controller="tabs">
+      <%= link_to box_category.name.humanize, url_for(box_category: box_category.name), data: { target:"tabs.tabLink" }, class: "#{params[:box_category] == box_category.name ? selected_tab_class : tab_class} w-32 overflow-hidden whitespace-no-wrap" %>
+      <%= form_with(model: box_category, class: "hidden", data: { target: "tabs.form" }) do |f| %>
+        <%= f.text_field :name, class:"#{params[:box_category] == box_category.name ? selected_tab_class : tab_class} w-32", data: { target: "tabs.textField" } %>
+      <% end %>
+      <a href="#" data-target="tabs.editButton" data-action="click->tabs#edit"><i class="fas fa-pen text-xs text-teal-600"></i></a>
+      <a href="#" data-target="tabs.saveButton" data-action="click->tabs#save" class="hidden"><i class="fas fa-save text-xs text-teal-600"></i></a>
     </li>
   <% end %>
   <li class="mr-1 flex flex-col justify-center">
-    <a href="#"><i class="fas fa-plus text-1xl"></i></a>
+    <%= form_with(model: BoxCategory.new) do |f| %>
+      <%= f.button :submit, class: tab_class do %>
+        <i class="fas fa-plus"></i>
+      <% end %>
+    <% end %>
   </li>
 </ul>
 <section data-controller="drag" class="flex justify-center align-middle flex-wrap" data-drag-url="/boxes/:id">

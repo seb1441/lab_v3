@@ -1,15 +1,11 @@
-import { Controller } from "stimulus"
-import StimulusReflex from 'stimulus_reflex';
+import ApplicationController from './application_controller'
 import { debounce } from 'lodash-es'
 import serializeForm from 'form-serialize'
 
-import Rails from '@rails/ujs'
-
-export default class extends Controller {
+export default class extends ApplicationController {
   static targets = [ "form", "boxDiv", "colorPicker", "richText", "name" ]
 
   connect() {
-    StimulusReflex.register(this)
     this.submit = debounce(this.submit, 500)
   }
 

@@ -9,7 +9,7 @@ class BoxesController < ApplicationController
 
     @boxes = @boxes.where(box_categories: { name: params[:box_category] }) if params[:box_category]
 
-    @box_category_names = BoxCategory.where(user: current_user).pluck(:name)
+    @box_categories = BoxCategory.where(user: current_user)
 
     @new_box = Box.new(boxable: Note.new)
     @new_box.color = current_user.last_used_box_color if current_user.last_used_box_color
@@ -31,6 +31,8 @@ class BoxesController < ApplicationController
     @box = Box.new(box_params)
     @box.user = current_user
     current_user.update(last_used_box_color: box_params[:color]) if current_user.last_used_box_color != box_params[:color]
+
+    @box.box_category = BoxCategory.find_by(name: params.dig("box", "box_category_name")) if params.dig("box", "box_category_name")
 
     respond_to do |format|
       if @box.save

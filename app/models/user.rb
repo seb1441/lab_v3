@@ -11,6 +11,7 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable, :trackable
 
   has_many :boxes
+  has_many :box_categories
 
   
   # after_create do

@@ -13,6 +13,7 @@
       <% end %>
     </div>
     <div class="mx-5">
+      <%= f.hidden_field :box_category_name, value: params[:box_category] %>
       <%= f.text_field :name, id: "#{"newBoxName" unless @box.persisted?}", class: "w-full my-1 bg-transparent outline-none border", style: "border-color: #{ @box.name.present? ? "transparent" : border_color_transformed(@box.color)}", data: { action: @box.persisted? ? "input->boxes#submit" : nil, target: "boxes.name" }, required: true %>
       <%= f.fields_for :boxable, @box.boxable do |boxable_form| %>
         <%= boxable_form.rich_text_area :rich_text, id: "#{"newBoxRichText" unless @box.persisted?}", class: "mb-4 bg-transparent w-full h-full", style: "border-color: #{@box.boxable.rich_text.body&.to_plain_text.present? ? "transparent" : border_color_transformed(@box.color)}", data: { action: @box.persisted? ? "input->boxes#submit" : nil, target: "boxes.richText" } %>
