@@ -1,7 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.session_store :cache_store
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -29,6 +28,8 @@ Rails.application.configure do
 
     config.cache_store = :null_store
   end
+
+  config.session_store :cache_store, key: '_session', compress: true, pool_size: 5, expire_after: 1.week
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local

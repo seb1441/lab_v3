@@ -5,7 +5,7 @@ class Box < ApplicationRecord
 
   validates :name, presence: true
 
-  acts_as_list
+  acts_as_list scope: [:user_id, :box_category_id]
 
   accepts_nested_attributes_for :boxable
   
