@@ -11,6 +11,10 @@ class BoxCategoriesController < ApplicationController
       respond_to do |format|
         format.html { redirect_to boxes_path }
       end
+    else
+      respond_to do |format|
+        format.html { redirect_to boxes_path, notice: @box_category.errors.full_messages }
+      end
     end
   end
 
