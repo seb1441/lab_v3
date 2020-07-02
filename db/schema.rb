@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_28_212357) do
+ActiveRecord::Schema.define(version: 2020_07_01_234257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_212357) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "color", default: "#f05252", null: false
-    t.bigint "box_category_id"
+    t.bigint "box_category_id", null: false
     t.integer "position"
     t.index ["box_category_id"], name: "index_boxes_on_box_category_id"
     t.index ["boxable_type", "boxable_id"], name: "index_boxes_on_boxable_type_and_boxable_id"

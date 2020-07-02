@@ -10,8 +10,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable
 
-  has_many :boxes
-  has_many :box_categories
+  has_many :boxes, dependent: :nullify
+  has_many :box_categories, dependent: :nullify
 
   
   # after_create do

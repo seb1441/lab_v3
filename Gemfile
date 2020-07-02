@@ -64,3 +64,5 @@ gem "faker", "~> 2.12"
 gem "view_component", "~> 2.11"
 
 gem "acts_as_list", "~> 1.0"
+
+gem 'honeybadger', '~> 4.0'
