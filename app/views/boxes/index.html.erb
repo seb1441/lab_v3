@@ -22,8 +22,8 @@
     <% end %>
   </li>
 </ul>
-<section data-controller="<%= "drag" if params[:box_category].present? %>" class="flex justify-center align-middle flex-wrap" data-drag-url="/boxes/:id">
-  <%= render BoxComponent.new(box: @new_box) if params[:box_category].present? %>
+<section data-controller="<%= "drag" if @box_category_id != "all" %>" class="flex justify-center align-middle flex-wrap" data-drag-url="/boxes/:id">
+  <%= render BoxComponent.new(box: @new_box) if @box_category_id != "all" %>
   <% @boxes.each do |box| %>
     <%= render BoxComponent.new(box: box) %>
   <% end %>
