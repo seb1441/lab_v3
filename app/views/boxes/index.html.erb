@@ -1,13 +1,13 @@
 <ul class="flex border-b mt-2 ml-2 flex-wrap">
   <li class="-mb-px mr-1">
-    <%= link_to "All", url_for, class: params[:box_category].blank? ? selected_tab_class : tab_class %>
+    <%= link_to "All", url_for(box_category: "all"), class: @box_category_id == "all" ? selected_tab_class : tab_class %>
   </li>
   <% @box_categories.each do |box_category| %>
     <li class="mr-1" data-controller="tabs">
       <div class="flex">
-        <%= link_to box_category.name, url_for(box_category: box_category.name), data: { controller: "boxcategories", action: "dragover->boxcategories#dragover dragenter->boxcategories#dragenter dragleave->boxcategories#dragleave", target:"tabs.tabLink", id: box_category.id }, class: "#{params[:box_category] == box_category.name ? selected_tab_class : tab_class} w-32 overflow-hidden whitespace-no-wrap" %>
+        <%= link_to box_category.name, url_for(box_category: box_category.id), data: { controller: "boxcategories", action: "dragover->boxcategories#dragover dragenter->boxcategories#dragenter dragleave->boxcategories#dragleave", target:"tabs.tabLink", id: box_category.id }, class: "#{@box_category_id.to_s == box_category.id.to_s ? selected_tab_class : tab_class} w-32 overflow-hidden whitespace-no-wrap" %>
         <%= form_with(model: box_category, class: "hidden", data: { target: "tabs.form" }) do |f| %>
-          <%= f.text_field :name, class:"#{params[:box_category] == box_category.name ? selected_tab_class : tab_class} w-32", data: { target: "tabs.textField" } %>
+          <%= f.text_field :name, class:"#{@box_category_id.to_s == box_category.id.to_s ? selected_tab_class : tab_class} w-32", data: { target: "tabs.textField" } %>
         <% end %>
         <a href="#" data-target="tabs.editButton" data-action="click->tabs#edit"><i class="fas fa-pen text-xs text-teal-600"></i></a>
         <a href="#" data-target="tabs.saveButton" data-action="click->tabs#save" class="hidden"><i class="fas fa-save text-xs text-teal-600"></i></a>
@@ -23,7 +23,7 @@
   </li>
 </ul>
 <section data-controller="<%= "drag" if params[:box_category].present? %>" class="flex justify-center align-middle flex-wrap" data-drag-url="/boxes/:id">
-  <%= render BoxComponent.new(box: @new_box) %>
+  <%= render BoxComponent.new(box: @new_box) if params[:box_category].present? %>
   <% @boxes.each do |box| %>
     <%= render BoxComponent.new(box: box) %>
   <% end %>

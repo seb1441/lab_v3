@@ -7,14 +7,16 @@ class BoxesController < ApplicationController
   def index
     @boxes = Box.includes(:box_category).where(user: current_user)
 
-    @boxes = @boxes.where(box_categories: { name: params[:box_category] }) if params[:box_category]
+    @boxes = @boxes.where(box_category_id: params[:box_category]) if params[:box_category] && params[:box_category] != "all"
 
     @box_categories = BoxCategory.where(user: current_user)
 
     @new_box = Box.new(boxable: Note.new)
     @new_box.color = current_user.last_used_box_color if current_user.last_used_box_color
     
-    @boxes = @boxes.order(position: :asc)
+    params[:box_category] ||= BoxCategory.where(user: current_user).first.id
+    @box_category_id = params[:box_category]
+    @boxes = @boxes.order(position: :desc)
   end
 
   def show
@@ -32,7 +34,7 @@ class BoxesController < ApplicationController
     @box.user = current_user
     current_user.update(last_used_box_color: box_params[:color]) if current_user.last_used_box_color != box_params[:color]
 
-    @box.box_category = BoxCategory.find_by(name: params.dig("box", "box_category_name")) if params.dig("box", "box_category_name")
+    # @box.box_category = BoxCategory.find_by(name: params.dig("box", "box_category_name")) if params.dig("box", "box_category_name")
 
     respond_to do |format|
       if @box.save
@@ -89,6 +91,6 @@ class BoxesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def box_params
-      params.require(:box).permit(:name, :color, :box_category_id, boxable_attributes: [:id, :rich_text])
+      params.require(:box).permit(:color, :box_category_id, boxable_attributes: [:id, :name, :rich_text])
     end
 end
