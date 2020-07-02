@@ -1,7 +1,7 @@
 class Box < ApplicationRecord
   belongs_to :user
   belongs_to :boxable, polymorphic: true, dependent: :destroy
-  belongs_to :box_category, dependent: :destroy
+  belongs_to :box_category
 
   acts_as_list scope: [:user_id, :box_category_id]
 
